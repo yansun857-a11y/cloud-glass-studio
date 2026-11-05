@@ -1,0 +1,71 @@
+<div id="cloud-glass-studio" class="cgs">
+  <div class="cgs-head">
+    <div>
+      <div class="cgs-eyebrow">CLOUD GLASS STUDIO</div>
+      <h3>☁️ 云雾玻璃控制台</h3>
+      <p>拖动滑块或选择颜色，聊天界面会立即变化。</p>
+    </div>
+    <span class="cgs-version">v1.0.0</span>
+  </div>
+
+  <section class="cgs-section">
+    <div class="cgs-section-title">玻璃效果</div>
+    <label class="cgs-control">
+      <span>毛玻璃模糊 <output data-cgs-output="blur">3 px</output></span>
+      <input data-cgs-key="blur" type="range" min="0" max="16" step="1">
+    </label>
+    <label class="cgs-control">
+      <span>玻璃透明度 <output data-cgs-output="opacity">20%</output></span>
+      <input data-cgs-key="opacity" type="range" min="0" max="70" step="1">
+    </label>
+    <label class="cgs-control">
+      <span>玻璃底色</span>
+      <input data-cgs-key="glassColor" type="color">
+    </label>
+    <label class="cgs-control">
+      <span>顶部与底栏透明度 <output data-cgs-output="barOpacity">28%</output></span>
+      <input data-cgs-key="barOpacity" type="range" min="0" max="85" step="1">
+    </label>
+  </section>
+
+  <section class="cgs-section">
+    <div class="cgs-section-title">字体与排版</div>
+    <label class="cgs-control">
+      <span>正文字体</span>
+      <select data-cgs-key="font">
+        <option value="ChillHuoSong_F">ChillHuoSong_F（当前正文）</option>
+        <option value="Noto Serif SC">Noto Serif SC</option>
+        <option value="serif">系统衬线字体</option>
+        <option value="sans-serif">系统无衬线字体</option>
+        <option value="KaiTi">楷体（设备支持时）</option>
+      </select>
+    </label>
+    <label class="cgs-control">
+      <span>正文字号 <output data-cgs-output="fontSize">1.00 rem</output></span>
+      <input data-cgs-key="fontSize" type="range" min="0.85" max="1.35" step="0.01">
+    </label>
+  </section>
+
+  <section class="cgs-section">
+    <div class="cgs-section-title">文字颜色</div>
+    <label class="cgs-control"><span>正文</span><input data-cgs-key="bodyColor" type="color"></label>
+    <label class="cgs-control"><span>灰色 / 斜体 / 次要文字</span><input data-cgs-key="secondaryColor" type="color"></label>
+    <label class="cgs-control"><span>引用 / 绿色强调</span><input data-cgs-key="quoteColor" type="color"></label>
+  </section>
+
+  <section class="cgs-section">
+    <div class="cgs-section-title">快速主题</div>
+    <div class="cgs-presets">
+      <button type="button" data-cgs-preset="cloud">晴空云雾</button>
+      <button type="button" data-cgs-preset="forest">森林手札</button>
+      <button type="button" data-cgs-preset="dusk">暮色旧书</button>
+      <button type="button" data-cgs-preset="original">原始风格</button>
+    </div>
+  </section>
+
+  <div class="cgs-actions">
+    <button type="button" class="cgs-reset" data-cgs-reset>恢复默认</button>
+    <span class="cgs-saved" data-cgs-status>修改会自动保存</span>
+  </div>
+  <p class="cgs-note">提示：字体列表只选择设备或当前美化文件已加载的字体；未安装的字体可能回退到系统字体。</p>
+</div>
