@@ -21,8 +21,37 @@
       <input data-cgs-key="glassColor" type="color">
     </label>
     <label class="cgs-control">
-      <span>顶部与底栏透明度 <output data-cgs-output="barOpacity">28%</output></span>
-      <input data-cgs-key="barOpacity" type="range" min="0" max="85" step="1">
+      <span>顶部栏透明度 <output data-cgs-output="barOpacity">28%</output></span>
+      <input data-cgs-key="barOpacity" type="range" min="0" max="100" step="1">
+    </label>
+  </section>
+
+  <section class="cgs-section">
+    <div class="cgs-section-title">界面绿色区域</div>
+    <p class="cgs-help">把酒馆设置折叠栏、弹出菜单和底部输入区分开调节，互不牵连。</p>
+    <label class="cgs-control">
+      <span>设置折叠栏底色</span>
+      <input data-cgs-key="drawerColor" type="color">
+    </label>
+    <label class="cgs-control">
+      <span>设置折叠栏不透明度 <output data-cgs-output="drawerOpacity">82%</output></span>
+      <input data-cgs-key="drawerOpacity" type="range" min="0" max="100" step="1">
+    </label>
+    <label class="cgs-control">
+      <span>弹出菜单底色</span>
+      <input data-cgs-key="menuColor" type="color">
+    </label>
+    <label class="cgs-control">
+      <span>弹出菜单不透明度 <output data-cgs-output="menuOpacity">96%</output></span>
+      <input data-cgs-key="menuOpacity" type="range" min="0" max="100" step="1">
+    </label>
+    <label class="cgs-control">
+      <span>底部输入区底色</span>
+      <input data-cgs-key="inputColor" type="color">
+    </label>
+    <label class="cgs-control">
+      <span>底部输入区不透明度 <output data-cgs-output="inputOpacity">90%</output></span>
+      <input data-cgs-key="inputOpacity" type="range" min="0" max="100" step="1">
     </label>
   </section>
 
@@ -54,10 +83,10 @@
   <section class="cgs-section">
     <div class="cgs-section-title">快速主题</div>
     <div class="cgs-presets">
-      <button type="button" data-cgs-preset="cloud">晴空云雾</button>
-      <button type="button" data-cgs-preset="forest">森林手札</button>
-      <button type="button" data-cgs-preset="dusk">暮色旧书</button>
-      <button type="button" data-cgs-preset="original">原始风格</button>
+      <button type="button" data-cgs-preset="cloud">☁️ 晴空云雾</button>
+      <button type="button" data-cgs-preset="forest">🌿 深林苔色</button>
+      <button type="button" data-cgs-preset="dusk">🌙 暮色玫瑰</button>
+      <button type="button" data-cgs-preset="original">◻ 原生素面</button>
     </div>
   </section>
 

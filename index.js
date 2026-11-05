@@ -8,18 +8,44 @@
         opacity: 20,
         barOpacity: 28,
         glassColor: '#f5f8f4',
+        drawerColor: '#dce8dc',
+        drawerOpacity: 82,
+        menuColor: '#dce8dc',
+        menuOpacity: 96,
+        inputColor: '#dce8dc',
+        inputOpacity: 90,
         font: 'ChillHuoSong_F',
         fontSize: 1,
         bodyColor: '#163040',
-        secondaryColor: '#373b3d',
+        secondaryColor: '#52605d',
         quoteColor: '#1c5330'
     };
 
     const PRESETS = {
-        cloud: { ...DEFAULTS, blur: 3, opacity: 20, barOpacity: 28, glassColor: '#f5f8f4', bodyColor: '#163040', secondaryColor: '#373b3d', quoteColor: '#1c5330' },
-        forest: { ...DEFAULTS, blur: 4, opacity: 27, barOpacity: 35, glassColor: '#e5eee3', bodyColor: '#18352e', secondaryColor: '#424b43', quoteColor: '#245b39' },
-        dusk: { ...DEFAULTS, blur: 5, opacity: 30, barOpacity: 38, glassColor: '#eee7e2', bodyColor: '#303342', secondaryColor: '#55515a', quoteColor: '#76504c' },
-        original: { ...DEFAULTS, blur: 0, opacity: 0, barOpacity: 0, glassColor: '#ffffff', bodyColor: '#163040', secondaryColor: '#676767', quoteColor: '#4b714d' }
+        cloud: {
+            ...DEFAULTS, blur: 7, opacity: 19, barOpacity: 24,
+            glassColor: '#e8f2f7', drawerColor: '#e6f0f2', drawerOpacity: 72,
+            menuColor: '#edf5f6', menuOpacity: 91, inputColor: '#e5eff2', inputOpacity: 78,
+            bodyColor: '#203746', secondaryColor: '#627780', quoteColor: '#477b88'
+        },
+        forest: {
+            ...DEFAULTS, blur: 5, opacity: 32, barOpacity: 42,
+            glassColor: '#dce8dc', drawerColor: '#c7d9c9', drawerOpacity: 93,
+            menuColor: '#d4e2d4', menuOpacity: 98, inputColor: '#c8dbc9', inputOpacity: 94,
+            bodyColor: '#17382e', secondaryColor: '#53675b', quoteColor: '#276344'
+        },
+        dusk: {
+            ...DEFAULTS, blur: 10, opacity: 28, barOpacity: 35,
+            glassColor: '#eadbd8', drawerColor: '#e7d4d1', drawerOpacity: 88,
+            menuColor: '#f0dfdc', menuOpacity: 97, inputColor: '#e4cfcb', inputOpacity: 91,
+            bodyColor: '#40313d', secondaryColor: '#79656c', quoteColor: '#98606b'
+        },
+        original: {
+            ...DEFAULTS, blur: 0, opacity: 0, barOpacity: 0,
+            glassColor: '#ffffff', drawerColor: '#ffffff', drawerOpacity: 0,
+            menuColor: '#ffffff', menuOpacity: 0, inputColor: '#ffffff', inputOpacity: 0,
+            bodyColor: '#163040', secondaryColor: '#676767', quoteColor: '#4b714d'
+        }
     };
 
     let settings;
@@ -54,6 +80,9 @@
         root.style.setProperty('--cgs-blur', `${Number(settings.blur)}px`);
         root.style.setProperty('--cgs-card-fill', rgba(settings.glassColor, Number(settings.opacity) / 100));
         root.style.setProperty('--cgs-bar-fill', rgba(settings.glassColor, Number(settings.barOpacity) / 100));
+        root.style.setProperty('--cgs-drawer-fill', rgba(settings.drawerColor, Number(settings.drawerOpacity) / 100));
+        root.style.setProperty('--cgs-menu-fill', rgba(settings.menuColor, Number(settings.menuOpacity) / 100));
+        root.style.setProperty('--cgs-input-fill', rgba(settings.inputColor, Number(settings.inputOpacity) / 100));
         root.style.setProperty('--cgs-font', `"${String(settings.font).replace(/["\\]/g, '')}", "Noto Serif SC", serif`);
         root.style.setProperty('--cgs-font-size', `${Number(settings.fontSize)}rem`);
         root.style.setProperty('--SmartThemeBodyColor', settings.bodyColor);
@@ -78,7 +107,7 @@
             const output = panel.querySelector(`[data-cgs-output="${key}"]`);
             if (output) {
                 if (key === 'blur') output.textContent = `${value} px`;
-                else if (key === 'opacity' || key === 'barOpacity') output.textContent = `${value}%`;
+                else if (['opacity', 'barOpacity', 'drawerOpacity', 'menuOpacity', 'inputOpacity'].includes(key)) output.textContent = `${value}%`;
                 else if (key === 'fontSize') output.textContent = `${Number(value).toFixed(2)} rem`;
             }
         }
