@@ -1,38 +1,59 @@
+/* Cloud Glass Studio — use SillyTavern's native inline-drawer shell */
 #cloud-glass-studio.cgs {
-  --cgs-panel: rgba(235, 241, 233, .94);
-  --cgs-ink: #203847;
-  color: var(--cgs-ink);
-  padding: 14px;
-  margin: 10px 0;
-  border: 1px solid rgba(255,255,255,.5);
-  border-radius: 14px;
-  background: var(--cgs-panel);
-  box-shadow: 0 8px 24px rgba(25,45,38,.12);
-  font-size: 14px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: inherit;
+  font-size: inherit;
 }
-#cloud-glass-studio * { box-sizing: border-box; }
-#cloud-glass-studio .cgs-head { display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
-#cloud-glass-studio .cgs-eyebrow { font-size:10px; letter-spacing:.18em; opacity:.62; }
-#cloud-glass-studio h3 { margin:4px 0; font-size:19px; color:#203847; }
-#cloud-glass-studio p { margin:4px 0 0; }
-#cloud-glass-studio .cgs-head p, #cloud-glass-studio .cgs-note { font-size:12px; opacity:.72; line-height:1.5; }
-#cloud-glass-studio .cgs-version { font-size:11px; opacity:.55; white-space:nowrap; }
-#cloud-glass-studio .cgs-section { margin-top:14px; padding-top:12px; border-top:1px solid rgba(40,65,55,.14); }
-#cloud-glass-studio .cgs-section-title { font-weight:700; margin-bottom:9px; }
-#cloud-glass-studio .cgs-control { display:block; margin:11px 0; }
-#cloud-glass-studio .cgs-control > span { display:flex; justify-content:space-between; gap:8px; margin-bottom:6px; font-size:13px; }
+#cloud-glass-studio .cgs-content {
+  padding: 0 0.5em 0.5em;
+}
+#cloud-glass-studio .cgs-intro {
+  margin: 0 0 0.6em;
+  font-size: 0.9em;
+  opacity: 0.72;
+  line-height: 1.5;
+}
+#cloud-glass-studio .cgs-section {
+  margin-top: 0.8em;
+  padding-top: 0.7em;
+  border-top: 1px solid var(--SmartThemeBorderColor, rgba(128,128,128,.25));
+}
+#cloud-glass-studio .cgs-section-title {
+  font-weight: 700;
+  margin-bottom: 0.6em;
+}
+#cloud-glass-studio .cgs-control { display:block; margin:0.7em 0; }
+#cloud-glass-studio .cgs-control > span {
+  display:flex; justify-content:space-between; gap:0.5em;
+  margin-bottom:0.35em; font-size:0.95em;
+}
 #cloud-glass-studio output { font-variant-numeric:tabular-nums; opacity:.7; }
-#cloud-glass-studio input[type="range"] { width:100%; accent-color:#456b62; }
-#cloud-glass-studio input[type="color"] { width:48px; height:34px; padding:2px; border:1px solid rgba(30,55,45,.22); border-radius:8px; background:transparent; }
-#cloud-glass-studio select { width:100%; min-height:38px; padding:6px 9px; border-radius:8px; }
-#cloud-glass-studio .cgs-presets { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
-#cloud-glass-studio button { min-height:38px; border-radius:9px; border:1px solid rgba(40,65,55,.2); padding:7px 10px; color:#203847; background:rgba(255,255,255,.58); }
-#cloud-glass-studio button:active { transform:scale(.98); }
-#cloud-glass-studio .cgs-actions { display:flex; justify-content:space-between; align-items:center; gap:8px; margin-top:14px; }
-#cloud-glass-studio .cgs-reset { background:rgba(50,75,65,.12); }
-#cloud-glass-studio .cgs-saved { font-size:11px; opacity:.65; }
-#cloud-glass-studio .cgs-note { margin-top:10px; }
-
+#cloud-glass-studio input[type="range"] { width:100%; accent-color:var(--SmartThemeQuoteColor, #456b62); }
+#cloud-glass-studio input[type="color"] {
+  width:48px; height:34px; padding:2px;
+  border:1px solid var(--SmartThemeBorderColor, rgba(128,128,128,.3));
+  border-radius:6px; background:transparent;
+}
+#cloud-glass-studio select { width:100%; min-height:38px; padding:6px 9px; }
+#cloud-glass-studio .cgs-presets {
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;
+}
+#cloud-glass-studio .cgs-presets button,
+#cloud-glass-studio .cgs-actions button {
+  min-height:36px; border-radius:6px; padding:6px 10px;
+}
+#cloud-glass-studio .cgs-actions {
+  display:flex; justify-content:space-between; align-items:center;
+  gap:8px; margin-top:0.9em;
+}
+#cloud-glass-studio .cgs-saved { font-size:0.8em; opacity:.65; }
+#cloud-glass-studio .cgs-note { margin-top:0.7em; font-size:0.8em; opacity:.72; line-height:1.5; }
 
 /* Live theme controls: variables are updated by index.js */
 .mes:not([is_system="true"]) {
