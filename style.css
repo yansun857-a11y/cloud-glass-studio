@@ -62,3 +62,39 @@
 .mes .mes_text i { color: var(--SmartThemeEmColor, #373b3d) !important; }
 .mes .mes_text q,
 .mes .mes_text blockquote { color: var(--SmartThemeQuoteColor, #1c5330) !important; }
+
+
+/* Collapsible accordion header */
+#cloud-glass-studio.cgs { padding: 0; overflow: hidden; }
+#cloud-glass-studio .cgs-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 58px;
+  padding: 13px 17px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+#cloud-glass-studio .cgs-summary::-webkit-details-marker { display: none; }
+#cloud-glass-studio .cgs-summary::after {
+  content: "⌄";
+  display: grid;
+  place-items: center;
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: #eaf1eb;
+  background: #18313b;
+  font-size: 21px;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+#cloud-glass-studio[open] .cgs-summary::after { transform: rotate(180deg); }
+#cloud-glass-studio .cgs-summary-title { font-size: 17px; font-weight: 700; color: #203847; }
+#cloud-glass-studio .cgs-content { padding: 0 14px 14px; }
+#cloud-glass-studio .cgs-intro { margin: 0 0 10px; font-size: 12px; opacity: .72; line-height: 1.5; }
+#cloud-glass-studio .cgs-section:first-child { margin-top: 8px; }
