@@ -78,7 +78,7 @@ function wrapInlineStyles(){
  const root=document.querySelector('#chat');if(!root)return;
  // First identify bracketed quotations. The punctuation remains in the normal body style.
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){
-  if(!node.nodeValue||!node.nodeValue.trim()||node.parentElement?.closest('.cgs2-body-inline,.cgs2-emphasis-inline,strong,b,em,i,small,blockquote,code,pre,a,mark,script,style'))return NodeFilter.FILTER_REJECT;
+  if(!node.nodeValue||!node.nodeValue.trim()||node.parentElement?.closest('.cgs2-body-inline,.cgs2-emphasis-inline,code,pre,a,script,style'))return NodeFilter.FILTER_REJECT;
   if(!node.parentElement?.closest('.mes_text'))return NodeFilter.FILTER_REJECT;
   return NodeFilter.FILTER_ACCEPT;
  }});
@@ -102,7 +102,7 @@ function wrapInlineStyles(){
   return;
  }
  const bodyWalker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){
-  if(!node.nodeValue||!node.nodeValue.trim()||node.parentElement?.closest('.cgs2-body-inline,.cgs2-emphasis-inline,strong,b,em,i,small,blockquote,code,pre,a,mark,script,style'))return NodeFilter.FILTER_REJECT;
+  if(!node.nodeValue||!node.nodeValue.trim()||node.parentElement?.closest('.cgs2-body-inline,.cgs2-emphasis-inline,code,pre,a,script,style'))return NodeFilter.FILTER_REJECT;
   if(!node.parentElement?.closest('.mes_text'))return NodeFilter.FILTER_REJECT;
   return NodeFilter.FILTER_ACCEPT;
  }});
