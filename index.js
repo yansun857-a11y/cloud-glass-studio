@@ -9,7 +9,6 @@
         blur: 8,
         opacity: 42,
         glassColor: '#e5edf2',
-        adapterProfile: 'native',
         saturation: 115,
         borderOpacity: 22,
         shadow: 18,
@@ -25,37 +24,11 @@
             messages: { enabled: true, selector: '#chat .mes:not([is_system="true"])' },
             topbar: { enabled: true, selector: '#top-bar, #top-settings-holder > .drawer' },
             composer: { enabled: true, selector: '#send_form' },
-            popups: { enabled: true, selector: '.popup, .context-menu, .mes_buttons .dropdown-menu' },
-            panels: { enabled: true, selector: '.drawer-content, #left-nav-panel, #right-nav-panel, #extensions_settings2 .inline-drawer-content, #extensions_settings .inline-drawer-content' }
+            popups: { enabled: false, selector: '.popup, .context-menu, .mes_buttons .dropdown-menu' },
+            panels: { enabled: false, selector: '.drawer-content, #left-nav-panel, #right-nav-panel, #extensions_settings2 .inline-drawer-content, #extensions_settings .inline-drawer-content' }
         }
     };
 
-    const ADAPTERS = {
-        native: {
-            chatCanvas: '#chat',
-            messages: '#chat .mes:not([is_system="true"])',
-            topbar: '#top-bar, #top-settings-holder > .drawer',
-            composer: '#send_form',
-            popups: '.popup, .context-menu, .mes_buttons .dropdown-menu',
-            panels: '.drawer-content, #left-nav-panel, #right-nav-panel, #extensions_settings2 .inline-drawer-content, #extensions_settings .inline-drawer-content'
-        },
-        baseL: {
-            chatCanvas: '#chat',
-            messages: '#chat .mes:not([is_system="true"])',
-            topbar: '#top-bar, #top-settings-holder > .drawer',
-            composer: '#send_form',
-            popups: '.popup',
-            panels: '.drawer-content, #left-nav-panel, #right-nav-panel, #extensions_settings .inline-drawer-content, #extensions_settings2 .inline-drawer-content'
-        },
-        duoBox: {
-            chatCanvas: '#chat',
-            messages: '#chat .mes:not([is_system="true"])',
-            topbar: '#top-settings-holder > .drawer, #top-bar',
-            composer: '#send_form',
-            popups: '.popup:not(.transparent_dialogue_popup), #dialogue_popup, #select_chat_popup, .draggable',
-            panels: '.drawer-content, #left-nav-panel, #right-nav-panel, #extensions_settings .inline-drawer-content, #extensions_settings2 .inline-drawer-content'
-        }
-    };
 
     const PRESETS = {
         sky: {
@@ -74,10 +47,6 @@
             blur: 16, opacity: 66, glassColor: '#252b3b', saturation: 135, borderOpacity: 34, shadow: 30, radius: 12,
             bodyColor: '#edf0f7', secondaryColor: '#b5bdce', quoteColor: '#b9a5df'
         },
-        native: {
-            blur: 0, opacity: 0, glassColor: '#ffffff', saturation: 100, borderOpacity: 0, shadow: 0, radius: 0,
-            bodyColor: '#263744', secondaryColor: '#626d75', quoteColor: '#476c70'
-        }
     };
 
     let settings;
@@ -105,6 +74,10 @@
                 }
             } else if (key in merged) merged[key] = value;
         }
+        // Popups and drawer/panel wrappers stay opt-in: backdrop-filter can change
+        // the containing block of fixed-position descendants on mobile browsers.
+        merged.regions.popups.enabled = false;
+        merged.regions.panels.enabled = false;
         return merged;
     }
     function getSettings() {
@@ -165,8 +138,6 @@
     function syncControls() {
         const panel = document.getElementById(ROOT_ID);
         if (!panel) return;
-        const adapterSelect = panel.querySelector('[data-cgs2-adapter]');
-        if (adapterSelect) adapterSelect.value = settings.adapterProfile || 'native';
         panel.querySelectorAll('[data-cgs2-key]').forEach(control => {
             const value = getPath(settings, control.dataset.cgs2Key);
             if (value === undefined || document.activeElement === control) return;
@@ -208,24 +179,14 @@
         }
         saveSoon();
     }
-    function applyAdapter(name) {
-        const adapter = ADAPTERS[name];
-        if (!adapter) return;
-        settings.adapterProfile = name;
-        for (const [region, selector] of Object.entries(adapter)) {
-            settings.regions[region] = { ...(settings.regions[region] || {}), enabled: true, selector };
-        }
-        applySettings();
-        saveSoon();
-    }
     function setPreset(name) {
         const preset = PRESETS[name];
         if (!preset) return;
         Object.assign(settings, preset);
-        if (name === 'native') {
-            Object.values(settings.regions).forEach(region => { region.enabled = false; });
-        } else {
-            Object.values(settings.regions).forEach(region => { region.enabled = true; });
+        // Presets only change appearance. Never re-enable popup/panel wrappers:
+        // backdrop-filter on those containers can break fixed-position UI on mobile.
+        for (const [regionName, region] of Object.entries(settings.regions)) {
+            region.enabled = !['popups', 'panels'].includes(regionName);
         }
         applySettings();
         saveSoon();
@@ -240,16 +201,10 @@
         panel.addEventListener('input', event => { if (event.target.matches('[data-cgs2-key]')) updateControl(event.target); });
         panel.addEventListener('change', event => {
             if (event.target.matches('[data-cgs2-key]')) updateControl(event.target);
-            if (event.target.matches('[data-cgs2-adapter]')) applyAdapter(event.target.value);
         });
         panel.addEventListener('click', event => {
             const preset = event.target.closest('[data-cgs2-preset]');
             if (preset) setPreset(preset.dataset.cgs2Preset);
-            if (event.target.closest('[data-cgs2-reset]')) {
-                settings = clone(DEFAULTS);
-                applySettings();
-                saveSoon();
-            }
             if (event.target.closest('[data-cgs2-refresh]')) refreshTargets();
         });
         syncControls();

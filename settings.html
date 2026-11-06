@@ -4,7 +4,7 @@
     <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
   </div>
   <div class="inline-drawer-content cgs2-content">
-    <p class="cgs2-intro">为不同酒馆主题提供可配置的玻璃效果。先选择预设，再按界面实际结构调整区域选择器。</p>
+    <p class="cgs2-intro">自动适配酒馆常用界面区域。选择喜欢的外观预设，再按需调整玻璃参数。</p>
 
     <section class="cgs2-section">
       <div class="cgs2-section-title">快速主题</div>
@@ -13,21 +13,9 @@
         <button type="button" data-cgs2-preset="forest">🌿 森林</button>
         <button type="button" data-cgs2-preset="rose">🌸 玫瑰</button>
         <button type="button" data-cgs2-preset="midnight">🌙 午夜</button>
-        <button type="button" data-cgs2-preset="native">原生 / 关闭</button>
       </div>
     </section>
 
-    <section class="cgs2-section">
-      <div class="cgs2-section-title">主题适配方案</div>
-      <label class="cgs2-control"><span>选择当前美化</span>
-        <select data-cgs2-adapter>
-          <option value="native">SillyTavern 原生 / 通用</option>
-          <option value="baseL">Base_L</option>
-          <option value="duoBox">双色盒子 · 浅色毛玻璃</option>
-        </select>
-      </label>
-      <p class="cgs2-help">选择后会载入对应区域选择器，并使用更高优先级的玻璃样式。之后仍可手动修改选择器。</p>
-    </section>
 
     <section class="cgs2-section">
       <div class="cgs2-section-title">全局玻璃参数</div>
@@ -87,9 +75,8 @@
     </section>
 
     <div class="cgs2-actions">
-      <button type="button" data-cgs2-reset>恢复通用版默认值</button>
       <span data-cgs2-status>修改会自动保存</span>
     </div>
-    <p class="cgs2-note">说明：选择器是主题适配的关键。不同美化的 DOM 结构和 CSS 优先级可能不同；内置了 Base_L 与双色盒子适配方案，其他主题仍可自定义；可以用浏览器检查元素后替换选择器。扩展只添加外观样式，不主动改动布局与交互。</p>
+    <p class="cgs2-note">说明：聊天、顶部栏和输入区使用通用选择器。弹窗与设置面板默认不应用毛玻璃，以避免影响移动端布局。</p>
   </div>
 </div>

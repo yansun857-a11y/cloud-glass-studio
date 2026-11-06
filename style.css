@@ -82,3 +82,9 @@ html.cgs2-typography-on .mes .mes_text em,
 html.cgs2-typography-on .mes .mes_text i { color:var(--cgs2-secondary-color,#626d75) !important; }
 html.cgs2-typography-on .mes .mes_text blockquote,
 html.cgs2-typography-on .mes .mes_text q { color:var(--cgs2-quote-color,#476c70) !important; }
+
+/* 2.1.1: keep the settings panel controls within narrow mobile viewports. */
+#cloud-glass-studio-universal .cgs2-region,
+#cloud-glass-studio-universal .cgs2-control,
+#cloud-glass-studio-universal .cgs2-section { min-width:0; max-width:100%; box-sizing:border-box; }
+#cloud-glass-studio-universal .cgs2-region textarea { max-width:100%; }
