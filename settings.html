@@ -1,39 +1,54 @@
 <div id="cloud-glass-studio-universal" class="inline-drawer cgs2">
  <div class="inline-drawer-toggle inline-drawer-header"><b>☁️ 云雾玻璃控制台</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
  <div class="inline-drawer-content cgs2-content" data-cgs2-body>
-  <div class="cgs2-master"><div><b>视觉效果总开关</b><small>一键停用全部覆盖，不会清除设置</small></div><input type="checkbox" data-cgs2-enabled aria-label="启用视觉效果"></div>
-  <section class="cgs2-section">
-   <div class="cgs2-section-title">玻璃效果</div>
+  <div class="cgs2-master"><div><b>视觉效果总开关</b><small>关闭后恢复主题原始样式，不会清除设置</small></div><input type="checkbox" data-cgs2-enabled aria-label="启用视觉效果"></div>
+  <section class="cgs2-section"><div class="cgs2-section-title">玻璃效果</div>
    <label class="cgs2-control"><span>毛玻璃模糊 <output data-cgs2-output="blur">8 px</output></span><input data-cgs2-key="blur" type="range" min="0" max="16" step="1"></label>
    <label class="cgs2-control"><span>玻璃透明度 <output data-cgs2-output="opacity">42%</output></span><input data-cgs2-key="opacity" type="range" min="0" max="70" step="1"></label>
    <label class="cgs2-control"><span>玻璃底色</span><input data-cgs2-key="glassColor" type="color"></label>
    <label class="cgs2-control"><span>顶部与底栏透明度 <output data-cgs2-output="barOpacity">32%</output></span><input data-cgs2-key="barOpacity" type="range" min="0" max="85" step="1"></label>
   </section>
-  <section class="cgs2-section">
-   <div class="cgs2-section-title">字体与排版</div>
-   <label class="cgs2-control"><span>字体</span><select data-cgs2-key="font"><option value="ChillHuoSong_F">ChillHuoSong_F</option><option value="Noto Serif SC">Noto Serif SC</option><option value="serif">系统衬线字体</option><option value="sans-serif">系统无衬线字体</option><option value="KaiTi">楷体</option><option value="Microsoft YaHei">微软雅黑</option><option value="SimSun">宋体</option><option value="custom">自定义字体名称</option></select></label>
+  <section class="cgs2-section"><div class="cgs2-section-title">字体与排版</div>
+   <label class="cgs2-control"><span>字体</span><select data-cgs2-key="font"><option value="ChillHuoSong_F">ChillHuoSong_F</option><option value="Noto Serif SC">Noto Serif SC</option><option value="serif">系统衬线字体</option><option value="sans-serif">系统无衬线字体</option><option value="KaiTi">楷体</option><option value="Microsoft YaHei">微软雅黑</option><option value="SimSun">宋体</option><option value="custom">自定义字体名称</option><option value="uploaded">已上传字体</option></select></label>
    <label class="cgs2-control"><span>自定义字体名称</span><input data-cgs2-key="customFont" type="text" placeholder="填写设备或主题已加载的字体名"></label>
-   <label class="cgs2-control"><span>字号 <output data-cgs2-output="fontSize">1.00 rem</output></span><input data-cgs2-key="fontSize" type="range" min="0.85" max="1.5" step="0.01"></label>
-   <label class="cgs2-control"><span>字重</span><select data-cgs2-key="fontWeight"><option value="300">细体</option><option value="400">常规</option><option value="500">中等</option><option value="600">半粗</option><option value="700">加粗</option><option value="800">特粗</option></select></label>
-   <label class="cgs2-toggle"><input data-cgs2-key="italic" type="checkbox"> 斜体</label>
+   <div class="cgs2-font-upload"><label>上传字体文件（WOFF2 / WOFF / TTF / OTF）<input type="file" data-font-upload accept=".woff2,.woff,.ttf,.otf,font/woff2,font/woff,font/ttf"></label><span data-font-name>未上传字体</span><span data-font-status></span><button type="button" data-font-remove>移除已上传字体</button><p class="cgs2-help">字体保存在当前浏览器本地，不会上传到 GitHub 或服务器；换设备需重新上传。</p></div>
    <label class="cgs2-control"><span>行间距 <output data-cgs2-output="lineHeight">1.75</output></span><input data-cgs2-key="lineHeight" type="range" min="1.2" max="2.4" step="0.05"></label>
    <label class="cgs2-control"><span>段落间距 <output data-cgs2-output="paragraphSpacing">0.65 em</output></span><input data-cgs2-key="paragraphSpacing" type="range" min="0" max="1.8" step="0.05"></label>
   </section>
-  <section class="cgs2-section">
-   <div class="cgs2-section-title">文字颜色与装饰</div>
-   <label class="cgs2-control"><span>正文</span><input data-cgs2-key="bodyColor" type="color"></label>
-   <label class="cgs2-control"><span>灰色 / 斜体 / 次要文字</span><input data-cgs2-key="secondaryColor" type="color"></label>
-   <label class="cgs2-control"><span>引用 / 强调文字</span><input data-cgs2-key="quoteColor" type="color"></label>
-   <label class="cgs2-toggle"><input data-cgs2-key="highlightEnabled" type="checkbox"> 启用文字底色</label>
-   <label class="cgs2-control"><span>文字底色</span><input data-cgs2-key="highlightColor" type="color"></label>
-   <label class="cgs2-control"><span>底色透明度 <output data-cgs2-output="highlightOpacity">45%</output></span><input data-cgs2-key="highlightOpacity" type="range" min="0" max="100" step="1"></label>
+  <section class="cgs2-section"><div class="cgs2-section-title">文字样式 · 三类独立设置</div>
+   <details open class="cgs2-style-group"><summary>正文</summary>
+    <label class="cgs2-control"><span>颜色</span><input data-style-kind="body" data-style-key="color" type="color"></label>
+    <label class="cgs2-control"><span>字号 <output data-style-output="body.size">1.00 rem</output></span><input data-style-kind="body" data-style-key="size" type="range" min=".75" max="1.5" step=".01"></label>
+    <label class="cgs2-control"><span>字重</span><select data-style-kind="body" data-style-key="weight"><option value="300">细体</option><option value="400">常规</option><option value="500">中等</option><option value="600">半粗</option><option value="700">加粗</option><option value="800">特粗</option></select></label>
+    <label class="cgs2-toggle"><input data-style-kind="body" data-style-key="italic" type="checkbox"> 斜体</label>
+    <label class="cgs2-toggle"><input data-style-kind="body" data-style-key="highlight" type="checkbox"> 荧光笔底色</label>
+    <label class="cgs2-control"><span>荧光笔颜色</span><input data-style-kind="body" data-style-key="highlightColor" type="color"></label>
+    <label class="cgs2-control"><span>透明度 <output data-style-output="body.highlightOpacity">45%</output></span><input data-style-kind="body" data-style-key="highlightOpacity" type="range" min="0" max="100" step="1"></label>
+    <label class="cgs2-control"><span>圆角 <output data-style-output="body.radius">2</output></span><input data-style-kind="body" data-style-key="radius" type="range" min="0" max="12" step="1"></label>
+   </details>
+   <details class="cgs2-style-group"><summary>强调文字（加粗 / strong）</summary>
+    <label class="cgs2-control"><span>颜色</span><input data-style-kind="emphasis" data-style-key="color" type="color"></label>
+    <label class="cgs2-control"><span>字号 <output data-style-output="emphasis.size">1.00 rem</output></span><input data-style-kind="emphasis" data-style-key="size" type="range" min=".75" max="1.5" step=".01"></label>
+    <label class="cgs2-control"><span>字重</span><select data-style-kind="emphasis" data-style-key="weight"><option value="300">细体</option><option value="400">常规</option><option value="500">中等</option><option value="600">半粗</option><option value="700">加粗</option><option value="800">特粗</option></select></label>
+    <label class="cgs2-toggle"><input data-style-kind="emphasis" data-style-key="italic" type="checkbox"> 斜体</label>
+    <label class="cgs2-toggle"><input data-style-kind="emphasis" data-style-key="highlight" type="checkbox"> 荧光笔底色</label>
+    <label class="cgs2-control"><span>荧光笔颜色</span><input data-style-kind="emphasis" data-style-key="highlightColor" type="color"></label>
+    <label class="cgs2-control"><span>透明度 <output data-style-output="emphasis.highlightOpacity">55%</output></span><input data-style-kind="emphasis" data-style-key="highlightOpacity" type="range" min="0" max="100" step="1"></label>
+    <label class="cgs2-control"><span>圆角 <output data-style-output="emphasis.radius">2</output></span><input data-style-kind="emphasis" data-style-key="radius" type="range" min="0" max="12" step="1"></label>
+   </details>
+   <details class="cgs2-style-group"><summary>次级文字（斜体 / 辅助内容）</summary>
+    <label class="cgs2-control"><span>颜色</span><input data-style-kind="secondary" data-style-key="color" type="color"></label>
+    <label class="cgs2-control"><span>字号 <output data-style-output="secondary.size">0.96 rem</output></span><input data-style-kind="secondary" data-style-key="size" type="range" min=".75" max="1.5" step=".01"></label>
+    <label class="cgs2-control"><span>字重</span><select data-style-kind="secondary" data-style-key="weight"><option value="300">细体</option><option value="400">常规</option><option value="500">中等</option><option value="600">半粗</option><option value="700">加粗</option><option value="800">特粗</option></select></label>
+    <label class="cgs2-toggle"><input data-style-kind="secondary" data-style-key="italic" type="checkbox"> 斜体</label>
+    <label class="cgs2-toggle"><input data-style-kind="secondary" data-style-key="highlight" type="checkbox"> 荧光笔底色</label>
+    <label class="cgs2-control"><span>荧光笔颜色</span><input data-style-kind="secondary" data-style-key="highlightColor" type="color"></label>
+    <label class="cgs2-control"><span>透明度 <output data-style-output="secondary.highlightOpacity">45%</output></span><input data-style-kind="secondary" data-style-key="highlightOpacity" type="range" min="0" max="100" step="1"></label>
+    <label class="cgs2-control"><span>圆角 <output data-style-output="secondary.radius">2</output></span><input data-style-kind="secondary" data-style-key="radius" type="range" min="0" max="12" step="1"></label>
+   </details>
+   <p class="cgs2-help">默认识别规则：正文为普通文字；强调为 strong / b；次级为 em / i / small。不同主题的特殊标签可能不同。</p>
   </section>
-  <section class="cgs2-section">
-   <div class="cgs2-section-title">我的主题模板</div>
-   <div data-cgs2-template-list class="cgs2-template-list"></div>
-   <button type="button" data-save-template class="cgs2-save-template">＋ 保存当前参数为新模板</button>
-   <p class="cgs2-help">四套初始模板，可无限新增、改名、应用或删除。模板保存完整外观参数，不会改变总开关。</p>
-  </section>
+  <section class="cgs2-section"><div class="cgs2-section-title">我的主题模板</div><div data-cgs2-template-list class="cgs2-template-list"></div><button type="button" data-save-template class="cgs2-save-template">＋ 保存当前参数为新模板</button><p class="cgs2-help">模板包含玻璃、字体和三类文字的全部设置。字体文件本身保存在本机浏览器。</p></section>
   <div class="cgs2-actions"><span data-cgs2-status>修改会自动保存</span></div>
  </div>
 </div>
