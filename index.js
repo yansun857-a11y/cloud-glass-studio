@@ -2,7 +2,7 @@
 'use strict';
 const MODULE='cloud_glass_studio_universal', ROOT_ID='cloud-glass-studio-universal', STYLE_ID='cgs2-dynamic-region-style';
 const BASE={
- enabled:true,blur:8,opacity:42,barOpacity:32,glassColor:'#e5edf2',
+ enabled:false,blur:8,opacity:42,barOpacity:32,glassColor:'#e5edf2',
  font:'ChillHuoSong_F',customFont:'',uploadedFontId:'',uploadedFontName:'',
  lineHeight:1.75,paragraphSpacing:.65,
  textStyles:{
@@ -85,7 +85,7 @@ function wrapInlineStyles(){
  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
  nodes.forEach(node=>{
   const value=node.nodeValue||'',frag=document.createDocumentFragment();
-  const pattern=/（([^（）]+)）|\\(([^()]+)\\)|【([^【】]+)】|「([^「」]+)」|『([^『』]+)』|〔([^〔〕]+)〕|［([^［］]+)］/g;
+  const pattern=/“([^”]+)”|‘([^’]+)’|「([^」]+)」|『([^』]+)』|"([^"]+)"/g;
   let last=0,match,changed=false;
   while((match=pattern.exec(value))){
    if(match.index>last)frag.appendChild(document.createTextNode(value.slice(last,match.index)));
@@ -198,6 +198,6 @@ function cleanupLegacyGlobalStyles(){
  root.classList.remove('cgs2-typography-on','cgs2-highlight-on');
  ['--SmartThemeBodyColor','--SmartThemeEmColor','--SmartThemeQuoteColor','--wx-text-primary','--wx-text-content','--wx-text-secondary','--wx-text-tertiary','--wx-text-quote','--wx-font-content','--wx-content-font-size'].forEach(k=>root.style.removeProperty(k));
 }
-function init(){try{cleanupLegacyGlobalStyles();settings=getSettings();applySettings();mountPanel();watchDom();console.info('[云雾玻璃控制台] 2.3.1 已加载');}catch(e){console.error('[云雾玻璃] 初始化失败',e);}}
+function init(){try{cleanupLegacyGlobalStyles();settings=getSettings();applySettings();mountPanel();watchDom();console.info('[云雾玻璃控制台] 2.3.2 已加载');}catch(e){console.error('[云雾玻璃] 初始化失败',e);}}
 if(window.jQuery)window.jQuery(init);else document.addEventListener('DOMContentLoaded',init,{once:true});
 })();
