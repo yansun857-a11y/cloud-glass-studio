@@ -70,19 +70,44 @@ function markTargets(){
  if(!settings.enabled)return;
  for(const [region,c] of Object.entries(settings.regions)){if(!c.enabled||!String(c.selector||'').trim())continue;try{document.querySelectorAll(c.selector).forEach(e=>e.setAttribute('data-cgs2-region',region));}catch(e){console.warn('[云雾玻璃] 无效选择器',region,e);}}
 }
-function unwrapBodyHighlights(){
- document.querySelectorAll('.mes_text .cgs2-body-inline').forEach(span=>{span.replaceWith(document.createTextNode(span.textContent||''));});
+function unwrapInlineStyles(){
+ document.querySelectorAll('.mes_text .cgs2-body-inline,.mes_text .cgs2-emphasis-inline').forEach(span=>{span.replaceWith(document.createTextNode(span.textContent||''));});
 }
-function wrapBodyHighlights(){
- if(!settings.enabled||!settings.textStyles.body.highlight){unwrapBodyHighlights();return;}
+function wrapInlineStyles(){
+ if(!settings.enabled){unwrapInlineStyles();return;}
  const root=document.querySelector('#chat');if(!root)return;
+ // First identify bracketed quotations. The punctuation remains in the normal body style.
  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){
-  if(!node.nodeValue||!node.nodeValue.trim()||node.parentElement?.closest('.cgs2-body-inline,strong,b,em,i,small,blockquote,code,pre,a,mark,script,style'))return NodeFilter.FILTER_REJECT;
+  if(!node.nodeValue||!node.nodeValue.trim()||node.parentElement?.closest('.cgs2-body-inline,.cgs2-emphasis-inline,strong,b,em,i,small,blockquote,code,pre,a,mark,script,style'))return NodeFilter.FILTER_REJECT;
   if(!node.parentElement?.closest('.mes_text'))return NodeFilter.FILTER_REJECT;
   return NodeFilter.FILTER_ACCEPT;
  }});
  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
- nodes.forEach(node=>{const span=document.createElement('span');span.className='cgs2-body-inline';node.parentNode?.replaceChild(span,node);span.appendChild(node);});
+ nodes.forEach(node=>{
+  const value=node.nodeValue||'',frag=document.createDocumentFragment();
+  const pattern=/（([^（）]+)）|\\(([^()]+)\\)|【([^【】]+)】|「([^「」]+)」|『([^『』]+)』|〔([^〔〕]+)〕|［([^［］]+)］/g;
+  let last=0,match,changed=false;
+  while((match=pattern.exec(value))){
+   if(match.index>last)frag.appendChild(document.createTextNode(value.slice(last,match.index)));
+   const opening=value[match.index],closing=value[pattern.lastIndex-1],inner=match.slice(1).find(x=>x!==undefined);
+   frag.appendChild(document.createTextNode(opening));
+   const span=document.createElement('span');span.className='cgs2-emphasis-inline';span.textContent=inner;frag.appendChild(span);
+   frag.appendChild(document.createTextNode(closing));last=pattern.lastIndex;changed=true;
+  }
+  if(changed){if(last<value.length)frag.appendChild(document.createTextNode(value.slice(last)));node.parentNode?.replaceChild(frag,node);}
+ });
+ // Body highlight is independent and only wraps remaining plain text nodes.
+ if(!settings.textStyles.body.highlight){
+  document.querySelectorAll('.mes_text .cgs2-body-inline').forEach(span=>span.replaceWith(document.createTextNode(span.textContent||'')));
+  return;
+ }
+ const bodyWalker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){
+  if(!node.nodeValue||!node.nodeValue.trim()||node.parentElement?.closest('.cgs2-body-inline,.cgs2-emphasis-inline,strong,b,em,i,small,blockquote,code,pre,a,mark,script,style'))return NodeFilter.FILTER_REJECT;
+  if(!node.parentElement?.closest('.mes_text'))return NodeFilter.FILTER_REJECT;
+  return NodeFilter.FILTER_ACCEPT;
+ }});
+ const bodyNodes=[];while(bodyWalker.nextNode())bodyNodes.push(bodyWalker.currentNode);
+ bodyNodes.forEach(node=>{const span=document.createElement('span');span.className='cgs2-body-inline';node.parentNode?.replaceChild(span,node);span.appendChild(node);});
 }
 function setVar(el,k,v){el.style.setProperty(k,v);}
 function applySettings(){
@@ -90,7 +115,7 @@ function applySettings(){
  if(!settings.enabled){
   root.classList.remove('cgs2-on');
   document.querySelectorAll('[data-cgs2-region]').forEach(e=>e.removeAttribute('data-cgs2-region'));
-  unwrapBodyHighlights();
+  unwrapInlineStyles();
  }else{
   root.classList.add('cgs2-on');
   setVar(root,'--cgs2-blur',`${+settings.blur||0}px`);
@@ -106,7 +131,7 @@ function applySettings(){
    setVar(root,prefix+'highlight',st.highlight?rgba(st.highlightColor,st.highlightOpacity/100):'transparent');setVar(root,prefix+'highlight-radius',`${st.radius}px`);
    setVar(root,prefix+'highlight-on',st.highlight?'1':'0');
   }
-  markTargets();wrapBodyHighlights();loadUploadedFont();
+  markTargets();wrapInlineStyles();loadUploadedFont();
  }
  syncControls();
 }
@@ -167,12 +192,12 @@ function mountPanel(){
   syncControls();
  }).catch(e=>console.error('[云雾玻璃] 面板加载失败',e));
 }
-function watchDom(){if(observer||!document.documentElement)return;observer=new MutationObserver(()=>{clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>{if(settings?.enabled){markTargets();wrapBodyHighlights();}},220);});observer.observe(document.documentElement,{childList:true,subtree:true});}
+function watchDom(){if(observer||!document.documentElement)return;observer=new MutationObserver(()=>{clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>{if(settings?.enabled){markTargets();wrapInlineStyles();}},220);});observer.observe(document.documentElement,{childList:true,subtree:true});}
 function cleanupLegacyGlobalStyles(){
  const root=document.documentElement;
  root.classList.remove('cgs2-typography-on','cgs2-highlight-on');
  ['--SmartThemeBodyColor','--SmartThemeEmColor','--SmartThemeQuoteColor','--wx-text-primary','--wx-text-content','--wx-text-secondary','--wx-text-tertiary','--wx-text-quote','--wx-font-content','--wx-content-font-size'].forEach(k=>root.style.removeProperty(k));
 }
-function init(){try{cleanupLegacyGlobalStyles();settings=getSettings();applySettings();mountPanel();watchDom();console.info('[云雾玻璃控制台] 2.3.0 已加载');}catch(e){console.error('[云雾玻璃] 初始化失败',e);}}
+function init(){try{cleanupLegacyGlobalStyles();settings=getSettings();applySettings();mountPanel();watchDom();console.info('[云雾玻璃控制台] 2.3.1 已加载');}catch(e){console.error('[云雾玻璃] 初始化失败',e);}}
 if(window.jQuery)window.jQuery(init);else document.addEventListener('DOMContentLoaded',init,{once:true});
 })();

@@ -26,7 +26,7 @@
     <label class="cgs2-control"><span>透明度 <output data-style-output="body.highlightOpacity">45%</output></span><input data-style-kind="body" data-style-key="highlightOpacity" type="range" min="0" max="100" step="1"></label>
     <label class="cgs2-control"><span>圆角 <output data-style-output="body.radius">2</output></span><input data-style-kind="body" data-style-key="radius" type="range" min="0" max="12" step="1"></label>
    </details>
-   <details class="cgs2-style-group"><summary>强调文字（加粗 / strong）</summary>
+   <details class="cgs2-style-group"><summary>括号内引用（（……）/ (…)）</summary>
     <label class="cgs2-control"><span>颜色</span><input data-style-kind="emphasis" data-style-key="color" type="color"></label>
     <label class="cgs2-control"><span>字号 <output data-style-output="emphasis.size">1.00 rem</output></span><input data-style-kind="emphasis" data-style-key="size" type="range" min=".75" max="1.5" step=".01"></label>
     <label class="cgs2-control"><span>字重</span><select data-style-kind="emphasis" data-style-key="weight"><option value="300">细体</option><option value="400">常规</option><option value="500">中等</option><option value="600">半粗</option><option value="700">加粗</option><option value="800">特粗</option></select></label>
@@ -46,7 +46,7 @@
     <label class="cgs2-control"><span>透明度 <output data-style-output="secondary.highlightOpacity">45%</output></span><input data-style-kind="secondary" data-style-key="highlightOpacity" type="range" min="0" max="100" step="1"></label>
     <label class="cgs2-control"><span>圆角 <output data-style-output="secondary.radius">2</output></span><input data-style-kind="secondary" data-style-key="radius" type="range" min="0" max="12" step="1"></label>
    </details>
-   <p class="cgs2-help">默认识别规则：正文为普通文字；强调为 strong / b；次级为 em / i / small。不同主题的特殊标签可能不同。</p>
+   <p class="cgs2-help">默认识别规则：正文为普通文字；括号内引用识别中文全角括号（……）、英文半角括号 (...)、【】、「」、『』、〔〕和［］内的文字；次级为 em / i / small。括号标点本身保持正文样式。</p>
   </section>
   <section class="cgs2-section"><div class="cgs2-section-title">我的主题模板</div><div data-cgs2-template-list class="cgs2-template-list"></div><button type="button" data-save-template class="cgs2-save-template">＋ 保存当前参数为新模板</button><p class="cgs2-help">模板包含玻璃、字体和三类文字的全部设置。字体文件本身保存在本机浏览器。</p></section>
   <div class="cgs2-actions"><span data-cgs2-status>修改会自动保存</span></div>
