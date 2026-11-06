@@ -103,7 +103,7 @@ function renderTemplates(){
 function saveTemplate(){const name=window.prompt('给这套模板起个名字：');if(!name||!name.trim())return;settings.templates.push({id:`custom-${Date.now()}-${Math.random().toString(36).slice(2,8)}`,name:name.trim(),values:snapshot()});renderTemplates();saveSoon();}
 function mountPanel(){
  const target=document.querySelector('#extensions_settings2')||document.querySelector('#extensions_settings');if(!target||document.getElementById(ROOT_ID))return;
- SillyTavern.getContext().renderExtensionTemplateAsync('third-party/cloud-glass-studio-universal','settings').then(html=>{
+ SillyTavern.getContext().renderExtensionTemplateAsync('third-party/cloud-glass-studio','settings').then(html=>{
   if(document.getElementById(ROOT_ID))return;target.insertAdjacentHTML('beforeend',html);const p=document.getElementById(ROOT_ID);if(!p)return;
   p.addEventListener('input',e=>{if(e.target.matches('[data-cgs2-key]'))updateControl(e.target);});
   p.addEventListener('change',e=>{if(e.target.matches('[data-cgs2-key]'))updateControl(e.target);});

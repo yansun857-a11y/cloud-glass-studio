@@ -8,3 +8,11 @@
 - 弹窗和抽屉容器默认不应用 backdrop-filter，以减少移动端定位异常风险。
 
 已执行 JavaScript 语法、manifest JSON、ZIP 文件清单检查；尚未在实际 SillyTavern 环境验证。字体选项取决于设备或主题是否加载对应字体。文字底色通过 `mark` 与 `strong` 元素实现，具体主题的 HTML 结构可能影响覆盖范围。
+
+
+## 2.2.1 修复
+修正 `renderExtensionTemplateAsync` 的扩展目录路径，匹配 GitHub 仓库安装目录 `third-party/cloud-glass-studio`，解决扩展安装成功但设置模板渲染失败的问题。
+
+
+## 2.2.1 修复
+修正 `renderExtensionTemplateAsync` 的扩展目录路径，匹配 GitHub 仓库安装目录 `third-party/cloud-glass-studio`，解决扩展安装成功但设置模板渲染失败的问题。
