@@ -89,10 +89,9 @@ function wrapInlineStyles(){
   let last=0,match,changed=false;
   while((match=pattern.exec(value))){
    if(match.index>last)frag.appendChild(document.createTextNode(value.slice(last,match.index)));
-   const opening=value[match.index],closing=value[pattern.lastIndex-1],inner=match.slice(1).find(x=>x!==undefined);
-   frag.appendChild(document.createTextNode(opening));
-   const span=document.createElement('span');span.className='cgs2-emphasis-inline';span.textContent=inner;frag.appendChild(span);
-   frag.appendChild(document.createTextNode(closing));last=pattern.lastIndex;changed=true;
+   // Include the opening and closing quotation marks so theme quote colors cannot leak through.
+   const span=document.createElement('span');span.className='cgs2-emphasis-inline';span.textContent=match[0];frag.appendChild(span);
+   last=pattern.lastIndex;changed=true;
   }
   if(changed){if(last<value.length)frag.appendChild(document.createTextNode(value.slice(last)));node.parentNode?.replaceChild(frag,node);}
  });
