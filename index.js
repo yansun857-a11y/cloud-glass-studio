@@ -20,7 +20,7 @@ const STARTERS=[
 {id:'starter-midnight',name:'🌙 午夜星河',values:{blur:14,opacity:62,barOpacity:48,glassColor:'#252b3b',font:'serif',customFont:'',uploadedFontId:'',uploadedFontName:'',lineHeight:1.75,paragraphSpacing:.65,textStyles:{body:{color:'#edf0f7',size:1,weight:'400',italic:false,highlight:false,highlightColor:'#b9a5df',highlightOpacity:35,radius:2},emphasis:{color:'#b9a5df',size:1,weight:'700',italic:false,highlight:false,highlightColor:'#b9a5df',highlightOpacity:45,radius:2},secondary:{color:'#b5bdce',size:.96,weight:'400',italic:true,highlight:false,highlightColor:'#b9a5df',highlightOpacity:35,radius:2}}}}
 ];
 const GLOBAL_KEYS=['blur','opacity','barOpacity','glassColor','font','customFont','uploadedFontId','uploadedFontName','lineHeight','paragraphSpacing'];
-let settings,saveTimer,refreshTimer,observer,fontUrl=null,dbPromise=null;
+let settings,saveTimer,refreshTimer,observer,fontUrl=null,loadedFontId='',dbPromise=null;
 const clone=v=>JSON.parse(JSON.stringify(v));
 function mergeStyles(old){
  const out=clone(BASE.textStyles);
@@ -101,7 +101,7 @@ function wrapInlineStyles(){
   return;
  }
  const bodyWalker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){
-  if(!node.nodeValue||!node.nodeValue.trim()||node.parentElement?.closest('.cgs2-body-inline,.cgs2-emphasis-inline,code,pre,a,script,style'))return NodeFilter.FILTER_REJECT;
+  if(!node.nodeValue||!node.nodeValue.trim()||node.parentElement?.closest('.cgs2-body-inline,.cgs2-emphasis-inline,strong,b,em,i,small,.mes_reasoning,.commentary,code,pre,a,script,style'))return NodeFilter.FILTER_REJECT;
   if(!node.parentElement?.closest('.mes_text'))return NodeFilter.FILTER_REJECT;
   return NodeFilter.FILTER_ACCEPT;
  }});
@@ -130,14 +130,19 @@ function applySettings(){
    setVar(root,prefix+'highlight',st.highlight?rgba(st.highlightColor,st.highlightOpacity/100):'transparent');setVar(root,prefix+'highlight-radius',`${st.radius}px`);
    setVar(root,prefix+'highlight-on',st.highlight?'1':'0');
   }
-  markTargets();wrapInlineStyles();loadUploadedFont();
+  markTargets();wrapInlineStyles();if(settings.font==='uploaded')loadUploadedFont();
  }
  syncControls();
 }
 function fmt(k,v){if(k==='blur')return `${v} px`;if(['opacity','barOpacity'].includes(k)||k.endsWith('highlightOpacity'))return `${v}%`;if(k.endsWith('.radius'))return `${v}px`;if(k.endsWith('.size'))return `${Number(v).toFixed(2)} rem`;if(k==='lineHeight')return Number(v).toFixed(2);if(k==='paragraphSpacing')return `${Number(v).toFixed(2)} em`;return v;}
 function syncControls(){
  const p=document.getElementById(ROOT_ID);if(!p)return;
- p.querySelectorAll('[data-cgs2-key]').forEach(el=>{const v=settings[el.dataset.cgs2Key];if(v!==undefined){if(document.activeElement!==el)el.value=v;}});
+ p.querySelectorAll('[data-cgs2-key]').forEach(el=>{
+  const k=el.dataset.cgs2Key,v=settings[k];
+  if(v!==undefined){if(document.activeElement!==el)el.value=v;
+   const output=p.querySelector(`[data-cgs2-output="${k}"]`);if(output)output.textContent=fmt(k,v);
+  }
+ });
  p.querySelectorAll('[data-style-kind][data-style-key]').forEach(el=>{const v=settings.textStyles[el.dataset.styleKind][el.dataset.styleKey];if(el.type==='checkbox')el.checked=!!v;else if(document.activeElement!==el)el.value=v;const o=p.querySelector(`[data-style-output="${el.dataset.styleKind}.${el.dataset.styleKey}"]`);if(o)o.textContent=fmt(`${el.dataset.styleKind}.${el.dataset.styleKey}`,v);});
  const toggle=p.querySelector('[data-cgs2-enabled]');if(toggle)toggle.checked=!!settings.enabled;
  const body=p.querySelector('[data-cgs2-body]');if(body)body.classList.toggle('cgs2-disabled',!settings.enabled);
@@ -167,9 +172,17 @@ async function storeFont(file){
  settings.uploadedFontId=id;settings.uploadedFontName=file.name;settings.font='uploaded';await loadUploadedFont();applySettings();saveSoon();
 }
 async function loadUploadedFont(){
- if(!settings.uploadedFontId)return;
- try{const db=await openFontDB();const record=await new Promise((resolve,reject)=>{const req=db.transaction('fonts','readonly').objectStore('fonts').get(settings.uploadedFontId);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
-  if(!record)return;if(fontUrl)URL.revokeObjectURL(fontUrl);fontUrl=URL.createObjectURL(new Blob([record.buffer],{type:record.format==='woff2'?'font/woff2':record.format==='woff'?'font/woff':record.format==='ttf'?'font/ttf':'font/otf'}));
+ const requestedId=settings.uploadedFontId;
+ if(!requestedId||loadedFontId===requestedId&&fontUrl)return;
+ try{
+  const db=await openFontDB();
+  const record=await new Promise((resolve,reject)=>{const req=db.transaction('fonts','readonly').objectStore('fonts').get(requestedId);req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});
+  // Ignore stale async results if the user selected or removed another font meanwhile.
+  if(requestedId!==settings.uploadedFontId||settings.font!=='uploaded')return;
+  if(!record)throw new Error('本地字体文件不存在，请重新上传');
+  if(fontUrl)URL.revokeObjectURL(fontUrl);
+  fontUrl=URL.createObjectURL(new Blob([record.buffer],{type:record.format==='woff2'?'font/woff2':record.format==='woff'?'font/woff':record.format==='ttf'?'font/ttf':'font/otf'}));
+  loadedFontId=requestedId;
   const style=ensureStyle();style.textContent=`@font-face{font-family:"CGSUploadedFont";src:url("${fontUrl}") format("${record.format}");font-display:swap}`;
  }catch(e){console.warn('[云雾玻璃] 字体加载失败',e);}
 }
@@ -197,6 +210,6 @@ function cleanupLegacyGlobalStyles(){
  root.classList.remove('cgs2-typography-on','cgs2-highlight-on');
  ['--SmartThemeBodyColor','--SmartThemeEmColor','--SmartThemeQuoteColor','--wx-text-primary','--wx-text-content','--wx-text-secondary','--wx-text-tertiary','--wx-text-quote','--wx-font-content','--wx-content-font-size'].forEach(k=>root.style.removeProperty(k));
 }
-function init(){try{cleanupLegacyGlobalStyles();settings=getSettings();applySettings();mountPanel();watchDom();console.info('[云雾玻璃控制台] 2.3.2 已加载');}catch(e){console.error('[云雾玻璃] 初始化失败',e);}}
+function init(){try{settings=getSettings();applySettings();mountPanel();watchDom();console.info('[云雾玻璃控制台] 2.3.5 已加载');}catch(e){console.error('[云雾玻璃] 初始化失败',e);}}
 if(window.jQuery)window.jQuery(init);else document.addEventListener('DOMContentLoaded',init,{once:true});
 })();
