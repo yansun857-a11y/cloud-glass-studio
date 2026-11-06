@@ -1,49 +1,35 @@
 #cloud-glass-studio-universal.cgs2{width:100%;margin:0;padding:0;border:0;background:transparent;box-shadow:none;color:inherit;font-size:inherit}
 #cloud-glass-studio-universal *{box-sizing:border-box}
-#cloud-glass-studio-universal .cgs2-content{padding:0 .55em .65em}
-#cloud-glass-studio-universal .cgs2-intro,#cloud-glass-studio-universal .cgs2-help{font-size:.86em;line-height:1.5;opacity:.72}
+#cloud-glass-studio-universal .cgs2-content{padding:0 .55em .7em}
+#cloud-glass-studio-universal .cgs2-master{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;margin:.6em 0;border:1px solid var(--SmartThemeBorderColor,rgba(128,128,128,.25));border-radius:9px}
+#cloud-glass-studio-universal .cgs2-master small{display:block;margin-top:3px;font-size:.78em;opacity:.65}
+#cloud-glass-studio-universal .cgs2-master input{width:22px;height:22px;accent-color:var(--SmartThemeQuoteColor,#668b91)}
+#cloud-glass-studio-universal .cgs2-content.cgs2-disabled>section{opacity:.42;pointer-events:none}
 #cloud-glass-studio-universal .cgs2-section{margin-top:.9em;padding-top:.75em;border-top:1px solid var(--SmartThemeBorderColor,rgba(128,128,128,.25))}
 #cloud-glass-studio-universal .cgs2-section-title{margin-bottom:.65em;font-weight:700}
-#cloud-glass-studio-universal .cgs2-control{display:block;margin:.75em 0;min-width:0}
+#cloud-glass-studio-universal .cgs2-control{display:block;margin:.7em 0;min-width:0}
 #cloud-glass-studio-universal .cgs2-control>span{display:flex;justify-content:space-between;gap:.5em;margin-bottom:.35em;font-size:.94em}
 #cloud-glass-studio-universal output{font-variant-numeric:tabular-nums;opacity:.7}
 #cloud-glass-studio-universal input[type=range]{width:100%;accent-color:var(--SmartThemeQuoteColor,#668b91)}
 #cloud-glass-studio-universal input[type=color]{width:48px;height:34px;padding:2px;border:1px solid var(--SmartThemeBorderColor,rgba(128,128,128,.3));border-radius:6px;background:transparent}
-#cloud-glass-studio-universal select{width:100%;min-height:38px;padding:6px 9px;border-radius:6px}
+#cloud-glass-studio-universal select,#cloud-glass-studio-universal input[type=text]{width:100%;min-height:36px;padding:6px 9px;border-radius:6px}
+#cloud-glass-studio-universal .cgs2-toggle{display:flex;align-items:center;gap:8px;margin:.7em 0}
+#cloud-glass-studio-universal .cgs2-toggle input{width:18px;height:18px;accent-color:var(--SmartThemeQuoteColor,#668b91)}
 #cloud-glass-studio-universal .cgs2-template-list{display:grid;gap:7px}
-#cloud-glass-studio-universal .cgs2-template-row{display:flex;align-items:center;gap:6px;min-width:0;padding:7px 8px;border:1px solid var(--SmartThemeBorderColor,rgba(128,128,128,.22));border-radius:7px}
+#cloud-glass-studio-universal .cgs2-template-row{display:flex;align-items:center;gap:6px;min-width:0;padding:7px 8px;border:1px solid var(--SmartThemeBorderColor,rgba(128,128,128,.22));border-radius:7px;flex-wrap:wrap}
 #cloud-glass-studio-universal .cgs2-template-row span{flex:1;min-width:0;overflow-wrap:anywhere;font-size:.9em}
 #cloud-glass-studio-universal .cgs2-template-row button,#cloud-glass-studio-universal .cgs2-save-template{min-height:34px;padding:5px 8px;border-radius:6px;white-space:nowrap}
 #cloud-glass-studio-universal .cgs2-save-template{width:100%;margin-top:9px}
-#cloud-glass-studio-universal .cgs2-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:1em}
+#cloud-glass-studio-universal .cgs2-help{font-size:.82em;line-height:1.5;opacity:.68}
+#cloud-glass-studio-universal .cgs2-actions{display:flex;justify-content:flex-end;margin-top:1em}
 #cloud-glass-studio-universal [data-cgs2-status]{font-size:.8em;opacity:.65}
-@media(max-width:420px){#cloud-glass-studio-universal .cgs2-template-row{flex-wrap:wrap}#cloud-glass-studio-universal .cgs2-template-row span{flex-basis:100%}}
-
-/* Dynamic glass styles. The popup and drawer wrapper regions are intentionally excluded. */
-html body #chat[data-cgs2-region="chatCanvas"]{
- background-color:var(--cgs2-fill,rgba(229,237,242,.42))!important;
- -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important;
- backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important
-}
-html body #chat .mes[data-cgs2-region="messages"]{
- background-color:var(--cgs2-fill,rgba(229,237,242,.42))!important;
- -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important;
- backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important
-}
-html body #top-bar[data-cgs2-region="topbar"],html body #top-settings-holder[data-cgs2-region="topbar"]{
- background-color:var(--cgs2-bar-fill,rgba(229,237,242,.32))!important;
- -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important;
- backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important
-}
-html body #send_form[data-cgs2-region="composer"]{
- background-color:var(--cgs2-bar-fill,rgba(229,237,242,.32))!important;
- -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important;
- backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important
-}
-html body .mes .mes_text,html body .mes .mes_text p,html body .mes .mes_text li{
- font-family:var(--cgs2-font,"ChillHuoSong_F","Noto Serif SC",serif)!important;
- font-size:var(--cgs2-font-size,1rem)!important
-}
-html body .mes .mes_text,html body .mes .mes_text p,html body .mes .mes_text strong{color:var(--cgs2-body-color,#263744)!important}
-html body .mes .mes_text em,html body .mes .mes_text i{color:var(--cgs2-secondary-color,#626d75)!important}
-html body .mes .mes_text q,html body .mes .mes_text blockquote{color:var(--cgs2-quote-color,#476c70)!important}
+html body #chat[data-cgs2-region="chatCanvas"]{background-color:var(--cgs2-fill,rgba(229,237,242,.42))!important;-webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important;backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important}
+html body #chat .mes[data-cgs2-region="messages"]{background-color:var(--cgs2-fill,rgba(229,237,242,.42))!important;-webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important;backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important}
+html body #top-bar[data-cgs2-region="topbar"],html body #top-settings-holder[data-cgs2-region="topbar"]{background-color:var(--cgs2-bar-fill,rgba(229,237,242,.32))!important;-webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important;backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important}
+html body #send_form[data-cgs2-region="composer"]{background-color:var(--cgs2-bar-fill,rgba(229,237,242,.32))!important;-webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important;backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(115%)!important}
+html.cgs2-typography-on body .mes .mes_text,html.cgs2-typography-on body .mes .mes_text p,html.cgs2-typography-on body .mes .mes_text li{font-family:var(--cgs2-font,serif)!important;font-size:var(--cgs2-font-size,1rem)!important;font-weight:var(--cgs2-font-weight,400)!important;font-style:var(--cgs2-italic,normal)!important;line-height:var(--cgs2-line-height,1.75)!important}
+html.cgs2-typography-on body .mes .mes_text p{margin-bottom:var(--cgs2-paragraph-spacing,.65em)!important}
+html.cgs2-typography-on body .mes .mes_text,html.cgs2-typography-on body .mes .mes_text p,html.cgs2-typography-on body .mes .mes_text strong{color:var(--cgs2-body-color,#263744)!important}
+html.cgs2-typography-on body .mes .mes_text em,html.cgs2-typography-on body .mes .mes_text i{color:var(--cgs2-secondary-color,#626d75)!important}
+html.cgs2-typography-on body .mes .mes_text q,html.cgs2-typography-on body .mes .mes_text blockquote{color:var(--cgs2-quote-color,#476c70)!important}
+html.cgs2-highlight-on body .mes .mes_text mark{background-color:var(--cgs2-highlight,rgba(242,228,168,.45))!important;border-radius:3px;padding:0 .08em}

@@ -1,47 +1,39 @@
 <div id="cloud-glass-studio-universal" class="inline-drawer cgs2">
-  <div class="inline-drawer-toggle inline-drawer-header">
-    <b>☁️ 云雾玻璃控制台</b>
-    <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
-  </div>
-  <div class="inline-drawer-content cgs2-content">
-    <p class="cgs2-intro">调节玻璃效果与文字外观。修改即时预览并自动保存。</p>
-
-    <section class="cgs2-section">
-      <div class="cgs2-section-title">玻璃效果</div>
-      <label class="cgs2-control"><span>毛玻璃模糊 <output data-cgs2-output="blur">8 px</output></span><input data-cgs2-key="blur" type="range" min="0" max="16" step="1"></label>
-      <label class="cgs2-control"><span>玻璃透明度 <output data-cgs2-output="opacity">42%</output></span><input data-cgs2-key="opacity" type="range" min="0" max="70" step="1"></label>
-      <label class="cgs2-control"><span>玻璃底色</span><input data-cgs2-key="glassColor" type="color"></label>
-      <label class="cgs2-control"><span>顶部与底栏透明度 <output data-cgs2-output="barOpacity">32%</output></span><input data-cgs2-key="barOpacity" type="range" min="0" max="85" step="1"></label>
-    </section>
-
-    <section class="cgs2-section">
-      <div class="cgs2-section-title">字体与排版</div>
-      <label class="cgs2-control"><span>正文字体</span>
-        <select data-cgs2-key="font">
-          <option value="ChillHuoSong_F">ChillHuoSong_F（当前正文）</option>
-          <option value="Noto Serif SC">Noto Serif SC</option>
-          <option value="serif">系统衬线字体</option>
-          <option value="sans-serif">系统无衬线字体</option>
-          <option value="KaiTi">楷体（设备支持时）</option>
-        </select>
-      </label>
-      <label class="cgs2-control"><span>正文字号 <output data-cgs2-output="fontSize">1.00 rem</output></span><input data-cgs2-key="fontSize" type="range" min="0.85" max="1.35" step="0.01"></label>
-    </section>
-
-    <section class="cgs2-section">
-      <div class="cgs2-section-title">文字颜色</div>
-      <label class="cgs2-control"><span>正文</span><input data-cgs2-key="bodyColor" type="color"></label>
-      <label class="cgs2-control"><span>灰色 / 斜体 / 次要文字</span><input data-cgs2-key="secondaryColor" type="color"></label>
-      <label class="cgs2-control"><span>引用 / 强调文字</span><input data-cgs2-key="quoteColor" type="color"></label>
-    </section>
-
-    <section class="cgs2-section">
-      <div class="cgs2-section-title">我的主题模板</div>
-      <div class="cgs2-template-list" data-cgs2-template-list></div>
-      <button type="button" class="cgs2-save-template" data-save-template>＋ 保存当前参数为新模板</button>
-      <p class="cgs2-help">内置四套初始模板，也可以无限新增、改名、应用或删除。模板只保存外观参数，不改变适配规则。</p>
-    </section>
-
-    <div class="cgs2-actions"><span data-cgs2-status>修改会自动保存</span></div>
-  </div>
+ <div class="inline-drawer-toggle inline-drawer-header"><b>☁️ 云雾玻璃控制台</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
+ <div class="inline-drawer-content cgs2-content" data-cgs2-body>
+  <div class="cgs2-master"><div><b>视觉效果总开关</b><small>一键停用全部覆盖，不会清除设置</small></div><input type="checkbox" data-cgs2-enabled aria-label="启用视觉效果"></div>
+  <section class="cgs2-section">
+   <div class="cgs2-section-title">玻璃效果</div>
+   <label class="cgs2-control"><span>毛玻璃模糊 <output data-cgs2-output="blur">8 px</output></span><input data-cgs2-key="blur" type="range" min="0" max="16" step="1"></label>
+   <label class="cgs2-control"><span>玻璃透明度 <output data-cgs2-output="opacity">42%</output></span><input data-cgs2-key="opacity" type="range" min="0" max="70" step="1"></label>
+   <label class="cgs2-control"><span>玻璃底色</span><input data-cgs2-key="glassColor" type="color"></label>
+   <label class="cgs2-control"><span>顶部与底栏透明度 <output data-cgs2-output="barOpacity">32%</output></span><input data-cgs2-key="barOpacity" type="range" min="0" max="85" step="1"></label>
+  </section>
+  <section class="cgs2-section">
+   <div class="cgs2-section-title">字体与排版</div>
+   <label class="cgs2-control"><span>字体</span><select data-cgs2-key="font"><option value="ChillHuoSong_F">ChillHuoSong_F</option><option value="Noto Serif SC">Noto Serif SC</option><option value="serif">系统衬线字体</option><option value="sans-serif">系统无衬线字体</option><option value="KaiTi">楷体</option><option value="Microsoft YaHei">微软雅黑</option><option value="SimSun">宋体</option><option value="custom">自定义字体名称</option></select></label>
+   <label class="cgs2-control"><span>自定义字体名称</span><input data-cgs2-key="customFont" type="text" placeholder="填写设备或主题已加载的字体名"></label>
+   <label class="cgs2-control"><span>字号 <output data-cgs2-output="fontSize">1.00 rem</output></span><input data-cgs2-key="fontSize" type="range" min="0.85" max="1.5" step="0.01"></label>
+   <label class="cgs2-control"><span>字重</span><select data-cgs2-key="fontWeight"><option value="300">细体</option><option value="400">常规</option><option value="500">中等</option><option value="600">半粗</option><option value="700">加粗</option><option value="800">特粗</option></select></label>
+   <label class="cgs2-toggle"><input data-cgs2-key="italic" type="checkbox"> 斜体</label>
+   <label class="cgs2-control"><span>行间距 <output data-cgs2-output="lineHeight">1.75</output></span><input data-cgs2-key="lineHeight" type="range" min="1.2" max="2.4" step="0.05"></label>
+   <label class="cgs2-control"><span>段落间距 <output data-cgs2-output="paragraphSpacing">0.65 em</output></span><input data-cgs2-key="paragraphSpacing" type="range" min="0" max="1.8" step="0.05"></label>
+  </section>
+  <section class="cgs2-section">
+   <div class="cgs2-section-title">文字颜色与装饰</div>
+   <label class="cgs2-control"><span>正文</span><input data-cgs2-key="bodyColor" type="color"></label>
+   <label class="cgs2-control"><span>灰色 / 斜体 / 次要文字</span><input data-cgs2-key="secondaryColor" type="color"></label>
+   <label class="cgs2-control"><span>引用 / 强调文字</span><input data-cgs2-key="quoteColor" type="color"></label>
+   <label class="cgs2-toggle"><input data-cgs2-key="highlightEnabled" type="checkbox"> 启用文字底色</label>
+   <label class="cgs2-control"><span>文字底色</span><input data-cgs2-key="highlightColor" type="color"></label>
+   <label class="cgs2-control"><span>底色透明度 <output data-cgs2-output="highlightOpacity">45%</output></span><input data-cgs2-key="highlightOpacity" type="range" min="0" max="100" step="1"></label>
+  </section>
+  <section class="cgs2-section">
+   <div class="cgs2-section-title">我的主题模板</div>
+   <div data-cgs2-template-list class="cgs2-template-list"></div>
+   <button type="button" data-save-template class="cgs2-save-template">＋ 保存当前参数为新模板</button>
+   <p class="cgs2-help">四套初始模板，可无限新增、改名、应用或删除。模板保存完整外观参数，不会改变总开关。</p>
+  </section>
+  <div class="cgs2-actions"><span data-cgs2-status>修改会自动保存</span></div>
+ </div>
 </div>
