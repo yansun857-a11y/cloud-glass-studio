@@ -1,9 +1,9 @@
 {
-  "display_name": "云雾玻璃控制台",
+  "display_name": "云雾玻璃控制台·通用版",
   "loading_order": 999,
   "js": "index.js",
   "css": "style.css",
   "author": "Cloud Glass Studio",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "auto_update": false
 }

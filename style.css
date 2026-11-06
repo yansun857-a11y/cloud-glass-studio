@@ -1,121 +1,84 @@
-/* Cloud Glass Studio — use SillyTavern's native inline-drawer shell */
-#cloud-glass-studio.cgs {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  color: inherit;
-  font-size: inherit;
-}
-#cloud-glass-studio .cgs-content {
-  padding: 0 0.5em 0.5em;
-}
-#cloud-glass-studio .cgs-intro {
-  margin: 0 0 0.6em;
-  font-size: 0.9em;
-  opacity: 0.72;
-  line-height: 1.5;
-}
-#cloud-glass-studio .cgs-section {
-  margin-top: 0.8em;
-  padding-top: 0.7em;
-  border-top: 1px solid var(--SmartThemeBorderColor, rgba(128,128,128,.25));
-}
-#cloud-glass-studio .cgs-section-title {
-  font-weight: 700;
-  margin-bottom: 0.6em;
-}
-#cloud-glass-studio .cgs-control { display:block; margin:0.7em 0; }
-#cloud-glass-studio .cgs-control > span {
-  display:flex; justify-content:space-between; gap:0.5em;
-  margin-bottom:0.35em; font-size:0.95em;
-}
-#cloud-glass-studio output { font-variant-numeric:tabular-nums; opacity:.7; }
-#cloud-glass-studio input[type="range"] { width:100%; accent-color:var(--SmartThemeQuoteColor, #456b62); }
-#cloud-glass-studio input[type="color"] {
-  width:48px; height:34px; padding:2px;
-  border:1px solid var(--SmartThemeBorderColor, rgba(128,128,128,.3));
-  border-radius:6px; background:transparent;
-}
-#cloud-glass-studio select { width:100%; min-height:38px; padding:6px 9px; }
-#cloud-glass-studio .cgs-presets {
-  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px;
-}
-#cloud-glass-studio .cgs-presets button,
-#cloud-glass-studio .cgs-actions button {
-  min-height:36px; border-radius:6px; padding:6px 10px;
-}
-#cloud-glass-studio .cgs-actions {
-  display:flex; justify-content:space-between; align-items:center;
-  gap:8px; margin-top:0.9em;
-}
-#cloud-glass-studio .cgs-saved { font-size:0.8em; opacity:.65; }
-#cloud-glass-studio .cgs-note { margin-top:0.7em; font-size:0.8em; opacity:.72; line-height:1.5; }
+/* Cloud Glass Studio Universal 2.1 — theme adapters + stronger cascade */
+#cloud-glass-studio-universal.cgs2 { width:100%; margin:0; padding:0; border:0; background:transparent; box-shadow:none; color:inherit; font-size:inherit; }
+#cloud-glass-studio-universal .cgs2-content { padding:0 .55em .65em; }
+#cloud-glass-studio-universal .cgs2-intro,
+#cloud-glass-studio-universal .cgs2-help,
+#cloud-glass-studio-universal .cgs2-note { font-size:.86em; line-height:1.5; opacity:.72; }
+#cloud-glass-studio-universal .cgs2-section { margin-top:.9em; padding-top:.75em; border-top:1px solid var(--SmartThemeBorderColor,rgba(128,128,128,.25)); }
+#cloud-glass-studio-universal .cgs2-section-title { margin-bottom:.65em; font-weight:700; }
+#cloud-glass-studio-universal .cgs2-control { display:block; margin:.75em 0; }
+#cloud-glass-studio-universal .cgs2-control>span { display:flex; justify-content:space-between; gap:.5em; margin-bottom:.35em; font-size:.94em; }
+#cloud-glass-studio-universal output { font-variant-numeric:tabular-nums; opacity:.7; }
+#cloud-glass-studio-universal input[type=range] { width:100%; accent-color:var(--SmartThemeQuoteColor,#668b91); }
+#cloud-glass-studio-universal input[type=color] { width:48px; height:34px; padding:2px; border:1px solid var(--SmartThemeBorderColor,rgba(128,128,128,.3)); border-radius:6px; background:transparent; }
+#cloud-glass-studio-universal select,
+#cloud-glass-studio-universal textarea { width:100%; box-sizing:border-box; padding:7px 9px; border-radius:6px; }
+#cloud-glass-studio-universal textarea { resize:vertical; font-family:monospace; font-size:.82em; }
+#cloud-glass-studio-universal .cgs2-presets { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+#cloud-glass-studio-universal .cgs2-presets button,
+#cloud-glass-studio-universal .cgs2-actions button,
+#cloud-glass-studio-universal .cgs2-secondary { min-height:36px; padding:6px 10px; border-radius:7px; }
+#cloud-glass-studio-universal .cgs2-region { margin:.55em 0; padding:.55em .7em; border:1px solid var(--SmartThemeBorderColor,rgba(128,128,128,.22)); border-radius:8px; }
+#cloud-glass-studio-universal .cgs2-region summary { cursor:pointer; font-weight:600; }
+#cloud-glass-studio-universal .cgs2-toggle { display:flex; align-items:center; gap:.5em; margin:.65em 0; }
+#cloud-glass-studio-universal .cgs2-actions { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:1em; }
+#cloud-glass-studio-universal [data-cgs2-status] { font-size:.8em; opacity:.65; }
 
-/* Live theme controls: variables are updated by index.js */
-.mes:not([is_system="true"]) {
-  background-color: var(--cgs-card-fill, rgba(245,248,244,.20)) !important;
-  -webkit-backdrop-filter: blur(var(--cgs-blur, 3px)) saturate(110%) !important;
-  backdrop-filter: blur(var(--cgs-blur, 3px)) saturate(110%) !important;
+/* Shared glass tokens. Important declarations intentionally outrank theme-level !important backgrounds. */
+html body [data-cgs2-region] {
+  background-color:var(--cgs2-fill,rgba(229,237,242,.42)) !important;
+  -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  border-color:var(--cgs2-border,rgba(229,237,242,.22)) !important;
+  border-radius:var(--cgs2-radius,14px) !important;
+  box-shadow:var(--cgs2-shadow,0 8px 26px rgba(0,0,0,.18)) !important;
 }
-#top-settings-holder,
-#send_form {
-  background-color: var(--cgs-bar-fill, rgba(245,248,244,.28)) !important;
-  -webkit-backdrop-filter: blur(var(--cgs-blur, 3px)) saturate(115%) !important;
-  backdrop-filter: blur(var(--cgs-blur, 3px)) saturate(115%) !important;
-}
-.mes .mes_text,
-.mes .mes_text p,
-.mes .mes_text li,
-.mes .mes_text blockquote,
-.mes .mes_text em,
-.mes .mes_text i {
-  font-family: var(--cgs-font, "ChillHuoSong_F", "Noto Serif SC", serif) !important;
-  font-size: var(--cgs-font-size, 1rem) !important;
-}
-.mes .mes_text,
-.mes .mes_text p,
-.mes .mes_text strong { color: var(--SmartThemeBodyColor, #163040) !important; }
-.mes .mes_text em,
-.mes .mes_text i { color: var(--SmartThemeEmColor, #373b3d) !important; }
-.mes .mes_text q,
-.mes .mes_text blockquote { color: var(--SmartThemeQuoteColor, #1c5330) !important; }
 
+/* High-specificity adapters for themes that style the same ST elements with !important. */
+html body #chat[data-cgs2-region="chatCanvas"],
+html body #chat .mes[data-cgs2-region="messages"] {
+  background-color:var(--cgs2-fill,rgba(229,237,242,.42)) !important;
+  -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  border-color:var(--cgs2-border,rgba(229,237,242,.22)) !important;
+  box-shadow:var(--cgs2-shadow,0 8px 26px rgba(0,0,0,.18)) !important;
+}
+html body #top-bar[data-cgs2-region="topbar"],
+html body #top-settings-holder > .drawer[data-cgs2-region="topbar"] {
+  background-color:var(--cgs2-fill,rgba(229,237,242,.42)) !important;
+  -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+}
+html body #send_form[data-cgs2-region="composer"] {
+  background-color:var(--cgs2-fill,rgba(229,237,242,.42)) !important;
+  -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  border-color:var(--cgs2-border,rgba(229,237,242,.22)) !important;
+}
+html body .popup[data-cgs2-region="popups"],
+html body #dialogue_popup[data-cgs2-region="popups"],
+html body #select_chat_popup[data-cgs2-region="popups"],
+html body .draggable[data-cgs2-region="popups"] {
+  background-color:var(--cgs2-fill,rgba(229,237,242,.42)) !important;
+  -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+}
+html body .drawer-content[data-cgs2-region="panels"],
+html body .inline-drawer-content[data-cgs2-region="panels"],
+html body #left-nav-panel[data-cgs2-region="panels"],
+html body #right-nav-panel[data-cgs2-region="panels"] {
+  background-color:var(--cgs2-fill,rgba(229,237,242,.42)) !important;
+  -webkit-backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  backdrop-filter:blur(var(--cgs2-blur,8px)) saturate(var(--cgs2-saturation,115%)) !important;
+  border-color:var(--cgs2-border,rgba(229,237,242,.22)) !important;
+}
 
-/* Collapsible accordion header */
-#cloud-glass-studio.cgs { padding: 0; overflow: hidden; }
-#cloud-glass-studio .cgs-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  min-height: 58px;
-  padding: 13px 17px;
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-}
-#cloud-glass-studio .cgs-summary::-webkit-details-marker { display: none; }
-#cloud-glass-studio .cgs-summary::after {
-  content: "⌄";
-  display: grid;
-  place-items: center;
-  flex: 0 0 30px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  color: #eaf1eb;
-  background: #18313b;
-  font-size: 21px;
-  line-height: 1;
-  transition: transform .2s ease;
-}
-#cloud-glass-studio[open] .cgs-summary::after { transform: rotate(180deg); }
-#cloud-glass-studio .cgs-summary-title { font-size: 17px; font-weight: 700; color: #203847; }
-#cloud-glass-studio .cgs-content { padding: 0 14px 14px; }
-#cloud-glass-studio .cgs-intro { margin: 0 0 10px; font-size: 12px; opacity: .72; line-height: 1.5; }
-#cloud-glass-studio .cgs-section:first-child { margin-top: 8px; }
+html.cgs2-typography-on .mes .mes_text,
+html.cgs2-typography-on .mes .mes_text p,
+html.cgs2-typography-on .mes .mes_text li { font-family:var(--cgs2-font,serif) !important; font-size:var(--cgs2-font-size,1rem) !important; }
+html.cgs2-typography-on .mes .mes_text,
+html.cgs2-typography-on .mes .mes_text p { color:var(--cgs2-body-color,#263744) !important; }
+html.cgs2-typography-on .mes .mes_text em,
+html.cgs2-typography-on .mes .mes_text i { color:var(--cgs2-secondary-color,#626d75) !important; }
+html.cgs2-typography-on .mes .mes_text blockquote,
+html.cgs2-typography-on .mes .mes_text q { color:var(--cgs2-quote-color,#476c70) !important; }
