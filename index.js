@@ -1,3 +1,8 @@
+/* Cloud Glass Studio — SillyTavern chat styling enhancement.
+ * Copyright (C) 2026 yansun857-a11y
+ * SPDX-License-Identifier: AGPL-3.0-only
+ * See LICENSE for license terms. This program comes with NO WARRANTY.
+ */
 (() => {
 'use strict';
 const MODULE='cloud_glass_studio_universal', ROOT_ID='cloud-glass-studio-universal', STYLE_ID='cgs2-dynamic-region-style';
@@ -205,11 +210,6 @@ function mountPanel(){
  }).catch(e=>console.error('[云雾玻璃] 面板加载失败',e));
 }
 function watchDom(){if(observer||!document.documentElement)return;observer=new MutationObserver(()=>{clearTimeout(refreshTimer);refreshTimer=setTimeout(()=>{if(settings?.enabled){markTargets();wrapInlineStyles();}},220);});observer.observe(document.documentElement,{childList:true,subtree:true});}
-function cleanupLegacyGlobalStyles(){
- const root=document.documentElement;
- root.classList.remove('cgs2-typography-on','cgs2-highlight-on');
- ['--SmartThemeBodyColor','--SmartThemeEmColor','--SmartThemeQuoteColor','--wx-text-primary','--wx-text-content','--wx-text-secondary','--wx-text-tertiary','--wx-text-quote','--wx-font-content','--wx-content-font-size'].forEach(k=>root.style.removeProperty(k));
-}
-function init(){try{settings=getSettings();applySettings();mountPanel();watchDom();console.info('[云雾玻璃控制台] 2.3.5 已加载');}catch(e){console.error('[云雾玻璃] 初始化失败',e);}}
+function init(){try{settings=getSettings();applySettings();mountPanel();watchDom();console.info('[云雾玻璃控制台] 2.3.6 已加载');}catch(e){console.error('[云雾玻璃] 初始化失败',e);}}
 if(window.jQuery)window.jQuery(init);else document.addEventListener('DOMContentLoaded',init,{once:true});
 })();

@@ -1,4 +1,4 @@
-# Cloud Glass Studio 2.3.0
+# Cloud Glass Studio 2.3.6
 
 ## 本版
 - 移除全局 SmartTheme / wx 颜色变量写入；字体与文字颜色仅作用于 `#chat .mes .mes_text`，视觉总开关通过作用域 class 启停，关闭时恢复主题原样。
@@ -15,9 +15,9 @@
 - 关闭总开关时移除本扩展的作用域 class 和标记，不写入/删除酒馆全局主题颜色变量。
 
 ## 更新
-覆盖 GitHub 仓库同名五个文件后，在 SillyTavern 更新扩展并刷新。升级沿用 `cloud_glass_studio_universal` 设置键；旧版模板和常用参数会迁移。请先备份扩展设置。
+将发布包中的六个文件上传并覆盖 GitHub 仓库对应文件后，在 SillyTavern 更新扩展并刷新。升级沿用 `cloud_glass_studio_universal` 设置键；旧版模板和常用参数会迁移。请先备份扩展设置。
 
-已执行 JavaScript 语法检查、manifest JSON 检查及 ZIP 内容检查；尚未在真实酒馆环境实测。
+已执行 JavaScript 语法检查、manifest JSON 检查及 ZIP 内容检查；2.3.6 已由项目维护者在真实 SillyTavern 环境完成实机验收。不同美化主题的 DOM 结构和 CSS 规则存在差异，不能保证所有主题均完整适配。
 
 
 ## 2.3.1 修正强调文字识别
@@ -56,3 +56,8 @@
 - 上传字体只在需要时加载；同一字体不再因每次拖动滑块而反复读取 IndexedDB、创建和撤销 Blob URL，并忽略过期异步加载结果。
 - 修正设置面板中残留的旧版“括号引用”说明。
 - 正文荧光笔包装会跳过粗体和次级语义元素，避免开启正文底色时覆盖这些元素原有的字重或次级文字样式。
+
+
+## License
+
+This project is licensed under the GNU Affero General Public License v3.0 only (AGPL-3.0-only). See [LICENSE](LICENSE) for the license terms. The canonical license text is available at https://www.gnu.org/licenses/agpl-3.0.html.
